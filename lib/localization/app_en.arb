@@ -1,0 +1,11 @@
+{   
+  "@_COMMON": {},
+  "app_title": "Flutter clean",
+    
+  "@_COMMON_ALERT": {},
+  "alert_ok": "Ok",
+  "@alert_ok": {
+    "description": "For use with alert"
+  },
+  "alert_cancle": "Cancle"
+}
