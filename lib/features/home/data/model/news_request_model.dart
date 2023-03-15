@@ -9,8 +9,8 @@ part 'news_request_model.g.dart';
 class NewsRequestModel extends BaseRequest {
   NewsRequestModel(
       {required this.search,
-      this.language,
-      this.sortBy,
+      this.country,
+      this.category,
       required this.page,
       required this.pageSize})
       : super(service: "NewsRequestModel");
@@ -18,11 +18,11 @@ class NewsRequestModel extends BaseRequest {
   @JsonKey(name: 'q', includeIfNull: false)
   String? search;
 
-  @JsonKey(name: 'language', includeIfNull: false)
-  String? language;
+  @JsonKey(name: 'country', includeIfNull: false)
+  String? country;
 
-  @JsonKey(name: 'sortBy', includeIfNull: false)
-  String? sortBy;
+  @JsonKey(name: 'category', includeIfNull: false)
+  String? category;
 
   @JsonKey(name: 'page')
   int page;

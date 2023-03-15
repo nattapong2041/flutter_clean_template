@@ -14,15 +14,15 @@ enum HttpMethod { post, get }
 
 enum UrlType { deufaultUrl, urlWithUnencodePath, absoluteUrl }
 
-enum ServiceUrl { everything }
+enum ServiceUrl { topHeadlines }
 
 enum ApiState { loading, completed, error }
 
 extension AppUrl on ServiceUrl {
   String get fullUrl {
     switch (this) {
-      case ServiceUrl.everything:
-        return "everything";
+      case ServiceUrl.topHeadlines:
+        return "top-headlines";
       default:
         return toString();
     }

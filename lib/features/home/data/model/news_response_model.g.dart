@@ -12,7 +12,7 @@ NewsResponseModel _$NewsResponseModelFromJson(Map<String, dynamic> json) =>
           ?.map((e) => ArticleModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     )
-      ..status = json['status'] as int?
+      ..status = json['status'] as String?
       ..code = json['code'] as String?
       ..message = json['message'] as String?
       ..totalResults = json['totalResults'] as int?;

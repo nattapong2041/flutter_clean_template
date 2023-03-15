@@ -32,8 +32,8 @@ class HomeViewModel extends BaseViewModel {
     loadingState();
 
     await _getNews
-        .execute(
-            "a", "en", "popularity", _newsPagination.page, _newsPagination.size)
+        .execute("tesla", "us", "general", _newsPagination.page,
+            _newsPagination.size)
         .then((value) {
       _listNews.addAll(value.articles);
       _newsPagination.setNext = value.totalResults;

@@ -9,7 +9,7 @@ import '../model/news_response_model.dart';
 class GetNewsService extends BaseService {
   Future<NewsResponseModel> getNewsEverythingService(NewsRequestModel request) {
     log('execute service: ${request.service}');
-    return execute(ServiceUrl.everything,
+    return execute(ServiceUrl.topHeadlines,
             urlType: UrlType.deufaultUrl,
             request: request.toJson(),
             method: HttpMethod.get,

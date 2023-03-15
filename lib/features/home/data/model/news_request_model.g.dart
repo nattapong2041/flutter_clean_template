@@ -9,8 +9,8 @@ part of 'news_request_model.dart';
 NewsRequestModel _$NewsRequestModelFromJson(Map<String, dynamic> json) =>
     NewsRequestModel(
       search: json['q'] as String?,
-      language: json['language'] as String?,
-      sortBy: json['sortBy'] as String?,
+      country: json['country'] as String?,
+      category: json['category'] as String?,
       page: json['page'] as int,
       pageSize: json['pageSize'] as int,
     );
@@ -25,8 +25,8 @@ Map<String, dynamic> _$NewsRequestModelToJson(NewsRequestModel instance) {
   }
 
   writeNotNull('q', instance.search);
-  writeNotNull('language', instance.language);
-  writeNotNull('sortBy', instance.sortBy);
+  writeNotNull('country', instance.country);
+  writeNotNull('category', instance.category);
   val['page'] = instance.page;
   val['pageSize'] = instance.pageSize;
   return val;

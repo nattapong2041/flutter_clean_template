@@ -9,7 +9,7 @@ class BaseRequest {
 
 class BaseResponse {
   @JsonKey(name: 'status')
-  int? status;
+  String? status;
 
   @JsonKey(name: 'code')
   String? code;
