@@ -8,15 +8,12 @@ class BaseRequest {
 }
 
 class BaseResponse {
-  @JsonKey(name: 'result')
-  int? result;
+  @JsonKey(name: 'status')
+  int? status;
+
+  @JsonKey(name: 'code')
+  String? code;
 
   @JsonKey(name: 'message')
   String? message;
-
-  @JsonKey(name: 'token')
-  bool? token;
-
-  @JsonKey(name: 'loginProvider')
-  int? loginProvider;
 }

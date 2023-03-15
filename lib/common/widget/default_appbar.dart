@@ -15,9 +15,10 @@ class DefaultAppbar extends StatelessWidget with PreferredSizeWidget {
         style: Theme.of(context)
             .textTheme
             .titleLarge
-            ?.copyWith(color: Theme.of(context).colorScheme.onPrimary),
+            ?.copyWith(color: Theme.of(context).colorScheme.onPrimaryContainer),
       ),
-      backgroundColor: Theme.of(context).colorScheme.primary,
+      foregroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
+      backgroundColor: Theme.of(context).colorScheme.primaryContainer,
       actions: const [
         //! temporary disable language change button
         // Row(

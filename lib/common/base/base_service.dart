@@ -14,17 +14,15 @@ enum HttpMethod { post, get }
 
 enum UrlType { deufaultUrl, urlWithUnencodePath, absoluteUrl }
 
-enum ServiceUrl { login, listStaff }
+enum ServiceUrl { everything }
 
 enum ApiState { loading, completed, error }
 
 extension AppUrl on ServiceUrl {
   String get fullUrl {
     switch (this) {
-      case ServiceUrl.login:
-        return "/account/login";
-      case ServiceUrl.listStaff:
-        return "/staff/list";
+      case ServiceUrl.everything:
+        return "everything";
       default:
         return toString();
     }
@@ -53,7 +51,7 @@ class BaseService {
   final Map<String, String> _header = {
     "Accept": "application/json",
     "content-type": "application/json",
-    'API-KEY': Config.apiKey,
+    'X-Api-Key': Config.apiKey,
   };
 
   @protected

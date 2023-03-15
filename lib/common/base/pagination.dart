@@ -11,12 +11,12 @@ class Pagination {
   }
 
   bool get hasNext => _hasNext;
-  int get from => _page * _size;
+  int get page => _page;
 
   int get size => _size;
 
-  set setNext(int total) {
-    _total = total;
+  set setNext(int totalPage) {
+    _total = totalPage;
     _page++;
     if (_page < _total) {
       _hasNext = true;
