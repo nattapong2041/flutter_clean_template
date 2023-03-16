@@ -29,6 +29,9 @@ class AppUrlImage extends StatelessWidget {
       ),
       child: CachedNetworkImage(
         imageUrl: imagePath,
+        fit: fit ?? BoxFit.fitHeight,
+        height: height == null ? null : height!.toDouble(),
+        width: width == null ? null : width!.toDouble(),
         memCacheHeight: height,
         memCacheWidth: width,
         fadeInDuration: const Duration(milliseconds: 100),
