@@ -6,12 +6,12 @@ import '../../../../common/base/pagination.dart';
 import '../../domain/entity/news.dart';
 import '../../domain/usecase/get_news.dart';
 
-class HomeViewModel extends BaseViewModel {
+class NewsViewModel extends BaseViewModel {
   final GetNews _getNews;
   List<News> _listNews = [];
   Pagination _newsPagination = Pagination(size: 20);
 
-  HomeViewModel(this._getNews) {
+  NewsViewModel(this._getNews) {
     getNews(shouldRefresh: true);
   }
 
@@ -31,10 +31,15 @@ class HomeViewModel extends BaseViewModel {
     if (!_newsPagination.hasNext) return;
     loadingState();
 
-    await _getNews
-        .execute("tesla", "us", "general", _newsPagination.page,
-            _newsPagination.size)
-        .then((value) {
+    GetNewsParam params = GetNewsParam(
+      "tesla",
+      "us",
+      "general",
+      _newsPagination.page,
+      _newsPagination.size,
+    );
+
+    await _getNews.execute(params).then((value) {
       _listNews.addAll(value.articles);
       _newsPagination.setNext = value.totalResults;
       completedState();

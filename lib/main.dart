@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_clean_template/features/home/presentation/view/home_screen.dart';
-import 'package:flutter_clean_template/features/main_screen.dart';
-import 'package:flutter_clean_template/features/news/presentation/view/news_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import 'common/app_route_name.dart';
 import 'common/extension/app_theme.dart';
+import 'features/main_screen.dart';
+import 'features/news/presentation/view/news_screen.dart';
 import 'localization/locale_view_model.dart';
 
 void main() {
@@ -47,8 +46,8 @@ class MyApp extends StatelessWidget {
           darkTheme: AppTheme.darkTheme,
           routes: {
             AppRouteName.main: (context) => const MainScreen(),
-            AppRouteName.home: (context) => HomeScreen(),
-            AppRouteName.news: (context) => NewsScreen(),
+            AppRouteName.home: (context) => const NewsScreen(),
+            //AppRouteName.news: (context) => NewsScreen(),
             AppRouteName.login: (context) => Container(),
           },
           initialRoute: AppRouteName.main,

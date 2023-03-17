@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_clean_template/features/home/data/repository/news_repository_impl.dart';
-import 'package:flutter_clean_template/features/home/data/service/get_news_service.dart';
-import 'package:flutter_clean_template/features/home/domain/usecase/get_news.dart';
-import 'package:flutter_clean_template/features/home/presentation/view/home_screen.dart';
 import 'package:provider/provider.dart';
 
-import 'home/presentation/view_model/home_view_model.dart';
+import 'news/data/repository/news_repository_impl.dart';
+import 'news/data/service/get_news_service.dart';
+import 'news/domain/usecase/get_news.dart';
+import 'news/presentation/view/news_screen.dart';
+import 'news/presentation/view_model/news_view_model.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -20,10 +20,10 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> _widgetOptions = <Widget>[
     Center(
       child: ChangeNotifierProvider(
-          create: (context) => HomeViewModel(
+          create: (context) => NewsViewModel(
                 GetNews(NewsRepositoryImpl(service: GetNewsService())),
               ),
-          child: const HomeScreen()),
+          child: const NewsScreen()),
     ),
     Center(
       child: Text('JUST A CHAT..'),
@@ -64,8 +64,8 @@ class _MainScreenState extends State<MainScreen> {
         onTap: _onItemTapped,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: const Icon(Icons.home),
-            label: 'Home',
+            icon: const Icon(Icons.feed),
+            label: 'Feeds',
             backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
           ),
           BottomNavigationBarItem(
