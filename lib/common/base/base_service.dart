@@ -51,7 +51,7 @@ class BaseService {
   final Map<String, String> _header = {
     "Accept": "application/json",
     "content-type": "application/json",
-    'X-Api-Key': Config.apiKey,
+    'Authorization': Config.apiKey,
   };
 
   @protected
@@ -117,7 +117,7 @@ class BaseService {
         log("header: $header");
         log("final url: $url$queryString");
         var response =
-            await client.get(Uri.parse('$url?$queryString'), headers: header);
+            await client.get(Uri.parse('$url$queryString'), headers: header);
         return response;
       } else {
         log("********** http post **********");
@@ -149,7 +149,7 @@ class BaseService {
         result += "&";
       }
     });
-    result = result.substring(0, result.length - 1);
+    result = result.substring(0, result.length - 1).replaceAll(" ", "%20");
     return result;
   }
 }

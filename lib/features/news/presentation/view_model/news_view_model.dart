@@ -1,13 +1,14 @@
 import 'dart:developer';
 
 import '../../../../common/base/base_service.dart';
+import '../../../../common/base/base_use_case.dart';
 import '../../../../common/base/base_view_model.dart';
 import '../../../../common/base/pagination.dart';
 import '../../domain/entity/news.dart';
 import '../../domain/usecase/get_news.dart';
 
 class NewsViewModel extends BaseViewModel {
-  final GetNews _getNews;
+  final BaseUseCase _getNews;
   List<News> _listNews = [];
   Pagination _newsPagination = Pagination(size: 20);
 
@@ -32,9 +33,9 @@ class NewsViewModel extends BaseViewModel {
     loadingState();
 
     GetNewsParam params = GetNewsParam(
-      "tesla",
+      null,
       "us",
-      "general",
+      null,
       _newsPagination.page,
       _newsPagination.size,
     );

@@ -20,7 +20,7 @@ class GetNewsParam {
       this.search, this.country, this.category, this.page, this.pageSize);
   String? search;
   String? country;
-  String category;
+  String? category;
   int page;
   int pageSize;
 }

@@ -9,15 +9,8 @@ class AppTheme {
         brightness: Brightness.light,
         extensions: <ThemeExtension<dynamic>>[
           AppColors(
-            primary: HexColor.fromHex("#00d1b2"),
-            secondary: HexColor.fromHex("#00d1b2"),
-            white: HexColor.fromHex("#ffffff"),
-            black: HexColor.fromHex("#000000"),
-            light: HexColor.fromHex("#f5f5f5"),
-            dark: HexColor.fromHex("#363636"),
-            success: HexColor.fromHex("#23d160"),
-            warning: HexColor.fromHex("#ffdd57"),
-            danger: HexColor.fromHex("#ff3860"),
+            baseShimmer: Colors.grey[300]!,
+            highlightShimmer: Colors.grey[100]!,
           ),
           const AppTextTheme(
             kanitNormalText: TextStyle(
@@ -39,15 +32,8 @@ class AppTheme {
         brightness: Brightness.dark,
         extensions: <ThemeExtension<dynamic>>[
           AppColors(
-            primary: HexColor.fromHex("#00d1b2"),
-            secondary: HexColor.fromHex("#00d1b2"),
-            white: HexColor.fromHex("#ffffff"),
-            black: HexColor.fromHex("#000000"),
-            light: HexColor.fromHex("#f5f5f5"),
-            dark: HexColor.fromHex("#363636"),
-            success: HexColor.fromHex("#23d160"),
-            warning: HexColor.fromHex("#ffdd57"),
-            danger: HexColor.fromHex("#ff3860"),
+            baseShimmer: Colors.grey[300]!,
+            highlightShimmer: Colors.grey[100]!,
           ),
           const AppTextTheme(
             kanitNormalText: TextStyle(

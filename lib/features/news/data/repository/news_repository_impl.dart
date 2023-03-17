@@ -10,7 +10,7 @@ class NewsRepositoryImpl implements NewsRepository {
   NewsRepositoryImpl({required this.service});
   @override
   Future<NewsResult> getNewsEverything(String? search, String? country,
-      String category, int page, int pageSize) async {
+      String? category, int page, int pageSize) async {
     try {
       final result = await service.getNewsEverythingService(NewsRequestModel(
           search: search,

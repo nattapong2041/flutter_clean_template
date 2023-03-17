@@ -17,8 +17,8 @@ class Pagination {
 
   set setNext(int totalPage) {
     _total = totalPage;
-    _page++;
-    if (_page < _total) {
+    if ((_page * _size) < _total) {
+      _page++;
       _hasNext = true;
     } else {
       _hasNext = false;
