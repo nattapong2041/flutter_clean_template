@@ -1,4 +1,3 @@
-import 'package:flutter_clean_template/common/config/config.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../../../common/base/base_model.dart';

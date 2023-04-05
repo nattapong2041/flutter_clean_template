@@ -26,8 +26,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
             create: (context) => LocaleViewModel(const Locale('th'))),
       ],
-      child: Consumer2<LocaleViewModel, LocaleViewModel>(
-          builder: (context, localeViewModel, loginViewModel, child) {
+      child:
+          Consumer<LocaleViewModel>(builder: (context, localeViewModel, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Flutter Template',

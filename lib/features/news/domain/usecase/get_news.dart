@@ -1,5 +1,4 @@
-import 'package:flutter_clean_template/common/base/base_use_case.dart';
-
+import '../../../../common/base/base_use_case.dart';
 import '../entity/news_result.dart';
 import '../repository/news_repository.dart';
 
