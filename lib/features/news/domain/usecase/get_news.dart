@@ -5,7 +5,7 @@ import '../repository/news_repository.dart';
 class GetNews implements BaseUseCase<NewsResult, GetNewsParam> {
   final NewsRepository _repository;
 
-  GetNews(this._repository);
+  GetNews({required NewsRepository repository}) : _repository = repository;
 
   @override
   Future<NewsResult> execute(GetNewsParam params) {

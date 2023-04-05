@@ -21,8 +21,11 @@ class _MainScreenState extends State<MainScreen> {
     Center(
       child: ChangeNotifierProvider(
           create: (context) => NewsViewModel(
-                GetNews(NewsRepositoryImpl(service: GetNewsService())),
-              ),
+                  useCase: GetNews(
+                repository: NewsRepositoryImpl(
+                  service: GetNewsService(),
+                ),
+              )),
           child: const NewsScreen()),
     ),
     Center(
