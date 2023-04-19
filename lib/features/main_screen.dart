@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import 'news/data/repository/news_repository_impl.dart';
 import 'news/data/service/get_news_service.dart';
-import 'news/domain/usecase/get_news.dart';
+import 'news/domain/usecase/get_news_usecase.dart';
 import 'news/presentation/view/news_screen.dart';
 import 'news/presentation/view_model/news_view_model.dart';
 
@@ -21,17 +21,17 @@ class _MainScreenState extends State<MainScreen> {
     Center(
       child: ChangeNotifierProvider(
           create: (context) => NewsViewModel(
-                  useCase: GetNews(
+                  useCase: GetNewsUseCase(
                 repository: NewsRepositoryImpl(
                   service: GetNewsService(),
                 ),
               )),
           child: const NewsScreen()),
     ),
-    Center(
+    const Center(
       child: Text('JUST A CHAT..'),
     ),
-    Center(
+    const Center(
       child: Text('JUST A SETTING..'),
     ),
   ];

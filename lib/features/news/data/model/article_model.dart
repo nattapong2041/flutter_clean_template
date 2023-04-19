@@ -1,5 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../domain/entity/news.dart';
+
 part 'article_model.g.dart';
 
 @JsonSerializable()
@@ -35,14 +37,21 @@ class ArticleModel {
   @JsonKey(name: 'content')
   String? content;
 
-  /// A necessary factory constructor for creating a new User instance
-  /// from a map. Pass the map to the generated `_$UserFromJson()` constructor.
-  /// The constructor is named after the source class, in this case, User.
   factory ArticleModel.fromJson(Map<String, dynamic> json) =>
       _$ArticleModelFromJson(json);
 
-  /// `toJson` is the convention for a class to declare support for serialization
-  /// to JSON. The implementation simply calls the private, generated
-  /// helper method `_$UserToJson`.
   Map<String, dynamic> toJson() => _$ArticleModelToJson(this);
+
+  //convert this model to domain entity
+  News toEntity() {
+    return News(
+      author ?? "",
+      title ?? "",
+      description ?? "",
+      url,
+      urlToImage,
+      publishedAt,
+      content ?? "",
+    );
+  }
 }

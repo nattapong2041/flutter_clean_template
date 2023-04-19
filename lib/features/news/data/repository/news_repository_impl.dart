@@ -21,14 +21,7 @@ class NewsRepositoryImpl implements NewsRepository {
 
       return NewsResult(
           result.articles
-                  ?.map<News>((article) => News(
-                      article.author ?? "",
-                      article.title ?? "",
-                      article.description ?? "",
-                      article.url,
-                      article.urlToImage,
-                      article.publishedAt,
-                      article.content ?? ""))
+                  ?.map<News>((article) => article.toEntity())
                   .toList() ??
               [],
           result.totalResults ?? 0);

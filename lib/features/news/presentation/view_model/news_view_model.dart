@@ -4,15 +4,15 @@ import '../../../../common/base/base_service.dart';
 import '../../../../common/base/base_view_model.dart';
 import '../../../../common/base/pagination.dart';
 import '../../domain/entity/news.dart';
-import '../../domain/usecase/get_news.dart';
+import '../../domain/usecase/get_news_usecase.dart';
 
 class NewsViewModel extends BaseViewModel {
-  final GetNews _useCase;
+  final GetNewsUseCase _useCase;
   List<News> _listNews = [];
   Pagination _newsPagination = Pagination(size: 20);
 
   //init _useCase and call getNews function with shouldRefresh = true
-  NewsViewModel({required GetNews useCase}) : _useCase = useCase {
+  NewsViewModel({required GetNewsUseCase useCase}) : _useCase = useCase {
     getNews(shouldRefresh: true);
   }
 
