@@ -92,7 +92,7 @@ class _NewsListViewState extends State<_NewsListView> {
 }
 
 class _SkeletonShimmer extends StatelessWidget {
-  const _SkeletonShimmer({super.key});
+  const _SkeletonShimmer();
 
   @override
   Widget build(BuildContext context) {
