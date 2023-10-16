@@ -1,88 +1,67 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import 'news/data/repository/news_repository_impl.dart';
-import 'news/data/service/get_news_service.dart';
-import 'news/domain/usecase/get_news_usecase.dart';
-import 'news/presentation/view/news_screen.dart';
-import 'news/presentation/view_model/news_view_model.dart';
+import 'package:go_router/go_router.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key}) : super(key: key);
+  const MainScreen({Key? key, required this.navigationShell}) : super(key: key);
 
+  final StatefulNavigationShell navigationShell;
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int _selectedIndex = 0;
-  late PageController _pageController;
-  final List<Widget> _widgetOptions = <Widget>[
-    Center(
-      child: ChangeNotifierProvider(
-          create: (context) => NewsViewModel(
-                  useCase: GetNewsUseCase(
-                repository: NewsRepositoryImpl(
-                  service: GetNewsService(),
-                ),
-              )),
-          child: const NewsScreen()),
-    ),
-    const Center(
-      child: Text('JUST A CHAT..'),
-    ),
-    const Center(
-      child: Text('JUST A SETTING..'),
-    ),
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-      _pageController.jumpToPage(_selectedIndex);
-    });
-  }
-
-  @override
-  void initState() {
-    _pageController = PageController();
-    _pageController = PageController(initialPage: _selectedIndex);
-    super.initState();
-  }
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: PageView(
-        controller: _pageController,
-        physics: const NeverScrollableScrollPhysics(),
-        children: _widgetOptions,
-      ),
       bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.shifting,
-        currentIndex: _selectedIndex,
-        selectedItemColor: Theme.of(context).colorScheme.onPrimaryContainer,
-        unselectedItemColor: Theme.of(context).colorScheme.onSecondaryContainer,
-        onTap: _onItemTapped,
-        items: <BottomNavigationBarItem>[
+        type: BottomNavigationBarType.fixed,
+        currentIndex: widget.navigationShell.currentIndex,
+        onTap: _onTap,
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
+        selectedFontSize: 12,
+        // unselectedItemColor: AppColors.gray60Default,
+        // selectedItemColor: AppColors.primaryGreenNormal,
+        // unselectedLabelStyle:
+        //     AppTextTheme(fontLanguage: FontLanguage.en).regularSBodyText.copyWith(color: AppColors.gray60Default),
+        // selectedLabelStyle:
+        //     AppTextTheme(fontLanguage: FontLanguage.en).regularSBodyText.copyWith(color: AppColors.primaryGreenNormal),
+        items: [
           BottomNavigationBarItem(
-            icon: const Icon(Icons.feed),
-            label: 'Feeds',
-            backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+            icon: Icon(
+              widget.navigationShell.currentIndex == 0 ? Icons.home : Icons.home_outlined,
+            ),
+            label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.chat),
-            label: 'Chat',
-            backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+            icon: Icon(
+              widget.navigationShell.currentIndex == 1 ? Icons.chat_bubble : Icons.chat_bubble_outlined,
+            ),
+            label: 'chat',
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.settings),
-            label: 'Setting',
-            backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+            icon: Icon(
+              widget.navigationShell.currentIndex == 2 ? Icons.settings : Icons.settings_outlined,
+            ),
+            label: 'setting',
           ),
         ],
       ),
+      body: widget.navigationShell,
     );
+  }
+
+  /// The callback function for when a bottom navigation bar item is tapped.
+  void _onTap(index) {
+    widget.navigationShell.goBranch(
+      index,
+      // A common pattern when using bottom navigation bars is to support
+      // navigating to the initial location when tapping the item that is
+      // already active. This example demonstrates how to support this behavior,
+      // using the initialLocation parameter of goBranch.
+      initialLocation: index == widget.navigationShell.currentIndex,
+    );
+    // and reload the destination page
   }
 }
