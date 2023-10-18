@@ -11,7 +11,7 @@ class ModelInjection {
     injector.pushNewScope(
       scopeName: 'In App Purchase Model',
       init: (GetIt getIt) {
-        getIt.registerLazySingleton<NewsService>(() => NewsService(dio: Dio()));
+        getIt.registerLazySingleton<NewsService>(() => NewsService(dio: getIt.get<Dio>()));
         getIt.registerLazySingleton<NewsRepositoryImpl>(
             () => NewsRepositoryImpl(service: getIt.get<NewsService>()));
       },

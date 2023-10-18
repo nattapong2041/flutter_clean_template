@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_clean_template/common/widget/app_image.dart';
+import '../../../common/widget/app_image.dart';
 import 'package:intl/intl.dart';
 
 class NewsCardView extends StatelessWidget {
@@ -22,7 +22,6 @@ class NewsCardView extends StatelessWidget {
       height: 450,
       child: Card(
           child: Column(
-        mainAxisSize: MainAxisSize.max,
         children: [
           if (urlToImage != null)
             AppUrlImage(

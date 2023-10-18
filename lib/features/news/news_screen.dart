@@ -69,7 +69,19 @@ class _NewsListViewState extends State<_NewsListView> {
           return const _SkeletonShimmer();
         } else if (state is NewsError) {
           return Center(
-            child: Text(state.message),
+            child: Column(
+              children: [
+                Text(state.message),
+                ElevatedButton(
+                  onPressed: () {
+                    context
+                        .read<NewsBloc>()
+                        .add(const NewsFecthData(shouldRefresh: true));
+                  },
+                  child: const Text("refresh"),
+                )
+              ],
+            ),
           );
         } else if (state is NewsReady) {
           return RefreshIndicator(

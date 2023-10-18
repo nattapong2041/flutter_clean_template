@@ -2,9 +2,6 @@ import 'dart:developer';
 import 'dart:math' as math;
 
 import 'package:dio/dio.dart';
-import 'package:get_it/get_it.dart';
-
-import '../app_setting.dart';
 import '../config/config.dart';
 
 class AppInterceptor extends Interceptor {
@@ -47,7 +44,7 @@ class AppInterceptor extends Interceptor {
   void onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
     options.queryParameters.addAll({
-      "lang": GetIt.I.get<AppSetting>().currentLocale.value ?? "th",
+      //"lang": GetIt.I.get<AppSetting>().currentLocale.value ?? "th",
       "apiKey": Config.apiKey
     });
     if (request) {

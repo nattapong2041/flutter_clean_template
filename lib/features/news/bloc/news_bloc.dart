@@ -33,8 +33,8 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
     emit(NewsLoading());
 
     GetNewsParam params = GetNewsParam(
+      "bitcoin",
       null,
-      "us",
       null,
       pagination.page,
       pagination.size,

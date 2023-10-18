@@ -1,5 +1,3 @@
-import 'base_response.dart';
-
 sealed class ServiceException<T> implements Exception {
   final String _message;
   final T? _data;
@@ -19,20 +17,20 @@ sealed class ServiceException<T> implements Exception {
 }
 
 final class APIException<T> extends ServiceException<T> {
-  final StatusCode _statusCode;
+  final String _code;
 
   APIException({
-    required StatusCode statusCode,
+    required String code,
     required String message,
     T? data,
-  })  : _statusCode = statusCode,
+  })  : _code = code,
         super(message: message, data: data);
 
-  StatusCode get statusCode => _statusCode;
+  String get codeCode => _code;
 
   @override
   String toString() {
-    return "$_statusCode $_message ${data == null ? '' : data.toString()}";
+    return "$_code $_message ${data == null ? '' : data.toString()}";
   }
 }
 

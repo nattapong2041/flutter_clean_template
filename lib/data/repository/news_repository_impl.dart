@@ -28,7 +28,7 @@ class NewsRepositoryImpl implements NewsRepository {
       return Left(response.left);
     } else {
       try {
-        if (response.right.statusCode == StatusCode.success) {
+        if (response.right.status == Status.ok) {
           return Right(NewsResult(
               response.right.articles!
                   .map<News>((e) => News(
@@ -43,8 +43,8 @@ class NewsRepositoryImpl implements NewsRepository {
               response.right.totalResults!));
         } else {
           return Left(APIException(
-            statusCode: response.right.statusCode,
-            message: response.right.message,
+            code: response.right.code ?? "",
+            message: response.right.message ?? "",
           ));
         }
       } catch (e) {
