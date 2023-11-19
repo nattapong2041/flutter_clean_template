@@ -1,3 +1,5 @@
+import 'result.dart';
+
 abstract interface class BaseUseCase<T, Param> {
-  Future<T> execute(Param params);
+  Future<Result<T>> call(Param param);
 }

@@ -1,56 +1,43 @@
-import 'dart:developer';
-
-import '../../common/base/base_response.dart';
-import '../../common/base/service_exception.dart';
-import '../../common/extension/either.dart';
+import '../../common/base/result.dart';
 import '../../domain/entity/news/news.dart';
 import '../../domain/entity/news/news_result.dart';
 import '../../domain/repository/news_repository.dart';
-import '../service/news_service.dart';
+import '../service/remote/news_remote.dart';
 import '../service/remote/request/news/news_request_model.dart';
 
 class NewsRepositoryImpl implements NewsRepository {
-  final NewsService service;
+  final NewsRemote service;
 
   NewsRepositoryImpl({required this.service});
 
   @override
-  Future<Either<ServiceException, NewsResult>> getNewsEverything(String? search,
-      String? country, String? category, int page, int pageSize) async {
+  Future<Result<NewsResult>> getNewsEverything(
+      String? search, String? country, String? category, int page, int pageSize) async {
     final response = await service.getNewsEverythingService(NewsRequestModel(
-        search: search,
-        country: country,
-        category: category,
-        page: page,
-        pageSize: pageSize));
+            search: search, country: country, category: category, page: page, pageSize: pageSize)
+        .toJson());
 
-    if (response.isLeft) {
-      return Left(response.left);
+    if (response.isSuccess) {
+      return Success(
+          data: NewsResult(
+        totalResults: response.asSuccess.data?.totalResults ?? 0,
+        articles: response.asSuccess.data?.articles
+                ?.map(
+                  (e) => News(
+                    author: e.author,
+                    title: e.title ?? "",
+                    description: e.description ?? "",
+                    url: e.url,
+                    urlToImage: e.urlToImage,
+                    publishedAt: e.publishedAt,
+                    content: e.content ?? "",
+                  ),
+                )
+                .toList() ??
+            [],
+      ));
     } else {
-      try {
-        if (response.right.status == Status.ok) {
-          return Right(NewsResult(
-              response.right.articles!
-                  .map<News>((e) => News(
-                      e.author,
-                      e.title ?? "",
-                      e.description ?? "",
-                      e.url,
-                      e.urlToImage,
-                      e.publishedAt,
-                      e.content ?? ""))
-                  .toList(),
-              response.right.totalResults!));
-        } else {
-          return Left(APIException(
-            code: response.right.code ?? "",
-            message: response.right.message ?? "",
-          ));
-        }
-      } catch (e) {
-        log(e.toString());
-        return Left(DataParsingException());
-      }
+      return Failure(exception: response.asFailure.exception);
     }
   }
 }

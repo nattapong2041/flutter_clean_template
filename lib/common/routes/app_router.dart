@@ -14,11 +14,13 @@ final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final rootNavigationKey = _rootNavigatorKey;
 
 /// Navigator key for bottom navigation bar routes
-final _sectionNavigatorKey = GlobalKey<NavigatorState>();
+final _mainScreenNavigationKey = GlobalKey<NavigatorState>();
 
 /// Screen paths for all app routes
 class ScreenPaths {
   static String home = '/';
+  static String chat = '/chat';
+  static String setting = '/setting';
 }
 
 /// Main app routes using Go Router package
@@ -36,7 +38,6 @@ final appRouter = GoRouter(
       },
       branches: [
         StatefulShellBranch(
-          navigatorKey: _sectionNavigatorKey,
           routes: <RouteBase>[
             GoRoute(
               name: ScreenPaths.home,
@@ -44,6 +45,32 @@ final appRouter = GoRouter(
               builder: (context, state) => BlocProvider<NewsBloc>(
                 create: (context) => GetIt.I.get<NewsBloc>()..add(const NewsFecthData()),
                 child: const NewsScreen(),
+              ),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: <RouteBase>[
+            GoRoute(
+              name: ScreenPaths.chat,
+              path: '/chat',
+              builder: (context, state) => const Scaffold(
+                body: Center(
+                  child: Text('Chat'),
+                ),
+              ),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: <RouteBase>[
+            GoRoute(
+              name: ScreenPaths.setting,
+              path: '/setting',
+              builder: (context, state) => const Scaffold(
+                body: Center(
+                  child: Text('Setting'),
+                ),
               ),
             ),
           ],

@@ -1,53 +1,23 @@
-sealed class ServiceException<T> implements Exception {
+sealed class ServiceException implements Exception {
   final String _message;
-  final T? _data;
-  ServiceException({
-    required String message,
-    T? data,
-  })  : _message = message,
-        _data = data;
+  ServiceException({required String message}) : _message = message;
 
   String get message => _message;
-  T? get data => _data;
 
   @override
   String toString() {
-    return "$_message ${data == null ? '' : data.toString()}";
+    return _message;
   }
 }
 
-final class APIException<T> extends ServiceException<T> {
-  final String _code;
-
-  APIException({
-    required String code,
-    required String message,
-    T? data,
-  })  : _code = code,
-        super(message: message, data: data);
-
-  String get codeCode => _code;
-
-  @override
-  String toString() {
-    return "$_code $_message ${data == null ? '' : data.toString()}";
-  }
-}
-
-final class ServerException<T> extends ServiceException<T> {
+final class ServerException<T> extends ServiceException {
   ServerException({
-    T? data,
-  }) : super(message: "Error while connect to server", data: data);
+    String? message,
+  }) : super(message: message ?? "Error while connect to server");
 }
 
-final class DataParsingException<T> extends ServiceException<T> {
-  DataParsingException({
-    T? data,
-  }) : super(message: "Error while parsing data", data: data);
-}
-
-final class NoInternetConnectionException<T> extends ServiceException<T> {
+final class NoInternetConnectionException<T> extends ServiceException {
   NoInternetConnectionException({
     T? data,
-  }) : super(message: "No internet connection", data: data);
+  }) : super(message: "No internet connection");
 }

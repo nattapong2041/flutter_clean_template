@@ -1,19 +1,18 @@
 import '../../../common/base/base_use_case.dart';
-import '../../../common/base/service_exception.dart';
-import '../../../common/extension/either.dart';
+import '../../../common/base/result.dart';
 import '../../entity/news/news_result.dart';
 import '../../repository/news_repository.dart';
 
-class GetNewsUseCase implements BaseUseCase<Either<ServiceException, NewsResult>, GetNewsParam> {
+class GetNewsUseCase implements BaseUseCase<NewsResult, GetNewsParam> {
   final NewsRepository _repository;
 
   GetNewsUseCase({required NewsRepository repository})
       : _repository = repository;
 
   @override
-  Future<Either<ServiceException, NewsResult>> execute(GetNewsParam params) {
-    return _repository.getNewsEverything(params.search, params.country,
-        params.category, params.page, params.pageSize);
+  Future<Result<NewsResult>> call(GetNewsParam param) {
+    return _repository.getNewsEverything(param.search, param.country,
+        param.category, param.page, param.pageSize);
   }
 }
 

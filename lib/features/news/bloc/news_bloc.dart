@@ -21,17 +21,19 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
     Emitter<NewsState> emit,
   ) async {
     late Pagination pagination;
+    if(state is NewsLoading) return;
+    
     if (state is NewsReady && !event.shouldRefresh) {
       final currentState = state as NewsReady;
-      pagination = currentState.newsPgiantion;
-
+      if(currentState.isLoadMore) return;
+      pagination = currentState.newsPagiantion;
+      emit(currentState.copyWith(isLoadMore: true));
       if (!pagination.hasNext) return;
     } else {
       pagination = Pagination();
+      emit(NewsLoading());
     }
-
-    emit(NewsLoading());
-
+  
     GetNewsParam params = GetNewsParam(
       "bitcoin",
       null,
@@ -39,16 +41,16 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
       pagination.page,
       pagination.size,
     );
-    final newsList = await _getNewsUseCase.execute(params);
+    final newsList = await _getNewsUseCase.call(params);
 
-    if (newsList.isLeft) {
-      emit(NewsError(message: newsList.left.message));
+    if (newsList.isFailure) {
+      emit(NewsError(message: newsList.asFailure.exception.message));
     } else {
-      pagination.setNext = newsList.right.totalResults;
+      pagination.setNext = newsList.asSuccess.data!.totalResults;
       (state is NewsReady && !event.shouldRefresh)
-          ? (state as NewsReady).news.addAll(newsList.right.articles)
-          : emit(NewsReady(news: newsList.right.articles, newsPgiantion: pagination));
-      
+          ? (state as NewsReady).news.addAll(newsList.asSuccess.data!.articles)
+          : emit(NewsReady(news: newsList.asSuccess.data!.articles, newsPagiantion: pagination));
+
       // emit(NewsReady(news: , newsPgiantion: pagination));
     }
   }

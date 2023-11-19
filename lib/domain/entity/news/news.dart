@@ -9,10 +9,16 @@ class News extends Equatable {
   final DateTime? publishedAt;
   final String content;
 
-  const News(this.author, this.title, this.description, this.url, this.urlToImage,
-      this.publishedAt, this.content);
+  const News({
+    this.author,
+    required this.title,
+    required this.description,
+    this.url,
+    this.urlToImage,
+    this.publishedAt,
+    required this.content,
+  });
 
   @override
-  List<Object?> get props =>
-      [author, title, description, url, urlToImage, publishedAt, content];
+  List<Object?> get props => [author, title, description, url, urlToImage, publishedAt, content];
 }

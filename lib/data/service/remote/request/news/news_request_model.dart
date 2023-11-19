@@ -1,19 +1,15 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import '../../../../../common/base/base_request.dart';
-
-
 part 'news_request_model.g.dart';
 
 @JsonSerializable()
-final class NewsRequestModel extends BaseRequest {
+final class NewsRequestModel {
   NewsRequestModel(
       {required this.search,
       this.country,
       this.category,
       required this.page,
-      required this.pageSize})
-      : super(service: "NewsRequestModel");
+      required this.pageSize});
 
   @JsonKey(name: 'q', includeIfNull: false)
   String? search;

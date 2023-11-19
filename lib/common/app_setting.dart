@@ -16,10 +16,6 @@ class AppSetting {
   bool isSafeDevice = false;
   bool isDevelopmentModeEnabled = false;
 
-  late final memId = ValueNotifier<int?>(null);
-  late final accessToken = ValueNotifier<String?>(null);
-  late final refreshToken = ValueNotifier<String?>(null);
-
   //TODO: init all app setting here
   /// Initial all app setting
   Future<void> init() async {
